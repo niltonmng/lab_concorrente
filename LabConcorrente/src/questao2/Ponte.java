@@ -1,5 +1,4 @@
 package questao2;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,21 +17,38 @@ public class Ponte implements Runnable {
 
 	@Override
 	public void run() {
-		while (!this.fila.isEmpty()) {
-			if (this.fila.contains("A")) {
-				System.out.println("Passei carro A --> B");
-				this.fila.remove("A");
-			} else if (this.fila.contains("B")) {
-				System.out.println("Passei carro B --> A");
-				this.fila.remove("B");
-			}
+		String primeiro = this.fila.get(0);
+		for (int i = 0; i < fila.size(); i++) {
+			if (this.fila.contains(primeiro)) {
+				if(primeiro.equals("A"))
+					System.out.println("Passei carro A --> B");
+				else
+					System.out.println("Passei carro B --> A");
+				this.fila.remove(primeiro);
+			} 
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
 				System.out.println(e.getMessage());
 			}
 		}
-		System.out.println("Sem carros");
+		if(!this.fila.isEmpty()) {
+			primeiro = this.fila.get(0);
+			while(!this.fila.isEmpty()) {
+				if (this.fila.contains(primeiro)) {
+					if(primeiro.equals("A"))
+						System.out.println("Passei carro A --> B");
+					else
+						System.out.println("Passei carro B --> A");
+					this.fila.remove(primeiro);
+				}
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					System.out.println(e.getMessage());
+				}
+			}
+		}
 	}
 
 }
